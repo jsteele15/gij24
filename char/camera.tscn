@@ -1,23 +1,35 @@
-[gd_scene load_steps=2 format=3 uid="uid://ddv3ud5x10hwu"]
+[gd_scene load_steps=3 format=3 uid="uid://ddv3ud5x10hwu"]
 
 [ext_resource type="Script" path="res://char/camera.gd" id="1_incgd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xtx68"]
 
 [node name="Camera" type="Camera2D"]
 script = ExtResource("1_incgd")
 
 [node name="left_but" type="Button" parent="."]
-offset_left = -424.0
-offset_top = 165.0
-offset_right = -335.0
-offset_bottom = 233.0
+offset_left = -437.0
+offset_top = 160.0
+offset_right = -348.0
+offset_bottom = 228.0
 text = "left But"
 
+[node name="ts_left" type="TouchScreenButton" parent="left_but"]
+position = Vector2(45, 33)
+scale = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_xtx68")
+
 [node name="right_but" type="Button" parent="."]
-offset_left = -316.0
+offset_left = -310.0
 offset_top = 166.0
-offset_right = -221.0
+offset_right = -227.0
 offset_bottom = 230.0
 text = "right But"
+
+[node name="ts_right" type="TouchScreenButton" parent="right_but"]
+position = Vector2(41, 31)
+scale = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_xtx68")
 
 [node name="jump_but" type="Button" parent="."]
 offset_left = 333.0
@@ -26,9 +38,22 @@ offset_right = 505.0
 offset_bottom = 264.0
 text = "Jump But"
 
-[connection signal="button_down" from="left_but" to="." method="_on_left_but_button_down"]
-[connection signal="button_up" from="left_but" to="." method="_on_left_but_button_up"]
-[connection signal="button_down" from="right_but" to="." method="_on_right_but_button_down"]
-[connection signal="button_up" from="right_but" to="." method="_on_right_but_button_up"]
-[connection signal="button_down" from="jump_but" to="." method="_on_jump_but_button_down"]
-[connection signal="button_up" from="jump_but" to="." method="_on_jump_but_button_up"]
+[node name="ts_jump" type="TouchScreenButton" parent="jump_but"]
+position = Vector2(89, 76)
+scale = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_xtx68")
+
+[node name="start_but" type="Button" parent="."]
+offset_left = -204.0
+offset_top = -225.0
+offset_right = 217.0
+offset_bottom = -62.0
+text = "START BUTTON"
+
+[connection signal="pressed" from="left_but/ts_left" to="." method="_on_ts_left_pressed"]
+[connection signal="released" from="left_but/ts_left" to="." method="_on_ts_left_released"]
+[connection signal="pressed" from="right_but/ts_right" to="." method="_on_ts_right_pressed"]
+[connection signal="released" from="right_but/ts_right" to="." method="_on_ts_right_released"]
+[connection signal="pressed" from="jump_but/ts_jump" to="." method="_on_ts_jump_pressed"]
+[connection signal="released" from="jump_but/ts_jump" to="." method="_on_ts_jump_released"]
+[connection signal="button_down" from="start_but" to="." method="_on_button_button_down"]

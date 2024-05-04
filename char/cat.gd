@@ -31,16 +31,21 @@ func _physics_process(delta):
 		$Ghost.visible = false
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
+	
 	var direction = Input.get_axis("left", "right")
-	if direction:
-		velocity.x = direction * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+	if globals.alive == true:
+		if direction:
+			velocity.x = direction * SPEED
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
+		
+		if globals.going_left:
+			velocity.x = -1 * SPEED
+		
+		if globals.going_right:
+			velocity.x = 1 * SPEED
 	
-	if globals.going_left:
-		velocity.x = -1 * SPEED
-	
-	if globals.going_right:
-		velocity.x = 1 * SPEED
+	if globals.alive == false:
+		velocity.x = 0
 	
 	move_and_slide()

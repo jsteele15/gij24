@@ -9,4 +9,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	
+	#when the cat becomes a ghost it flies into the air, when it gets so far itll reset the scene
+	if $cat.position.y <= -1000:
+		globals.reset()
+		get_tree().reload_current_scene()
